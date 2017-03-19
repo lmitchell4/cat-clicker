@@ -3,11 +3,9 @@
   display: inline;
 }
 
-#cat:hover {
-  
-  
+.vspace {
+  height: 30px;
 }
-
 
 
 * {box-sizing:border-box;}

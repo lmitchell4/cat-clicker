@@ -1,9 +1,21 @@
 
-var counter = 0;
-$("#cat").click(function(e) {
-  counter++;
-  $("#count").text(counter);
+
+var catOneName = "Chloe's";
+$("#cat-1-name").text(catOneName);
+var counter1 = 0;
+$("#cat-1").click(function(e) {
+  counter1++;
+  $("#count-1").text(counter1);
 });
+
+var catTwoName = "Kitty's";
+$("#cat-2-name").text(catTwoName);
+var counter2 = 0;
+$("#cat-2").click(function(e) {
+  counter2++;
+  $("#count-2").text(counter2);
+});
+
 
 
 // function loadData() {
