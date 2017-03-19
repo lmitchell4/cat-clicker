@@ -1,11 +1,35 @@
 
+#main-container {
+  margin-top: 20px;
+}
+
 .inline {
   display: inline;
+}
+
+.cat-name {
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+
+.cat-name:hover {
+  color: #fa8072;
+}
+
+#cat-list {
+  padding-left: 20px;
 }
 
 .vspace {
   height: 30px;
 }
+
+
+
+
+
+
+
 
 
 * {box-sizing:border-box;}

@@ -9,137 +9,64 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 		<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet">
+    <link href="bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="css/style.css" rel="stylesheet" type="text/css">
 	</head>
 
-	<body>
-    <a href="#"><img id="cat-1" src="images/cat-1-500.png"></a>
-    <div>
-      <h2 id="cat-1-name" class="inline"></h2>
-      <h2 class="inline">clicks:</h2>
-      <h2 id="count-1" class="inline">0</h2>
+	<body>   
+    <div id="main-container" class="container">
+      <div class="row padding-top padding-bottom">
+      
+        <div class="col-xs-3">
+          <h2>Select a cat!</h2>
+          <ul id="cat-list">
+          </ul>
+        </div>
+        
+        <div class="col-xs-9">
+          <div id="cat-container">
+            <!-- <a href="#"><img id="cat-1" src="images/cat-1-300.png"></a> -->
+            <!-- <div> -->
+              <!-- <h2 id="cat-1-name" class="inline"></h2> -->
+              <!-- <h2 class="inline">clicks:</h2> -->
+              <!-- <h2 id="count-1" class="inline">0</h2> -->
+            <!-- </div> -->
+
+            <!-- <a href="#"><img id="cat-2" src="images/cat-2-300.png"></a> -->
+            <!-- <div> -->
+              <!-- <h2 id="cat-2-name" class="inline"></h2> -->
+              <!-- <h2 class="inline">clicks:</h2> -->
+              <!-- <h2 id="count-2" class="inline">0</h2> -->
+            <!-- </div> -->
+
+            <!-- <a href="#"><img id="cat-3" src="images/cat-3-250.png"></a> -->
+            <!-- <div> -->
+              <!-- <h2 id="cat-3-name" class="inline"></h2> -->
+              <!-- <h2 class="inline">clicks:</h2> -->
+              <!-- <h2 id="count-2" class="inline">0</h2> -->
+            <!-- </div> -->
+
+            <!-- <a href="#"><img id="cat-3" src="images/cat-4-300.png"></a> -->
+            <!-- <div> -->
+              <!-- <h2 id="cat-3-name" class="inline"></h2> -->
+              <!-- <h2 class="inline">clicks:</h2> -->
+              <!-- <h2 id="count-2" class="inline">0</h2> -->
+            <!-- </div>     -->
+
+            <!-- <a href="#"><img id="cat-3" src="images/cat-5-300.png"></a> -->
+            <!-- <div> -->
+              <!-- <h2 id="cat-3-name" class="inline"></h2> -->
+              <!-- <h2 class="inline">clicks:</h2> -->
+              <!-- <h2 id="count-2" class="inline">0</h2> -->
+            <!-- </div> -->
+          </div>
+        </div>
+        
+      </div>
     </div>
-
-    <div class="vspace"></div>
-    
-    <a href="#"><img id="cat-2" src="images/cat-2-500.png"></a>
-    <div>
-      <h2 id="cat-2-name" class="inline"></h2>
-      <h2 class="inline">clicks:</h2>
-      <h2 id="count-2" class="inline">0</h2>
-    </div>
-
-    
-    <!-- <div class="row banner padding-none" id="banner"> -->
-      <!-- <div class="col-xs-1"></div> -->
-      <!-- <div class="col-xs-5"> -->
-        <!-- <div id="banner-text-div"> -->
-          <!-- <h2>Farm</h2> -->
-          <!-- <h1>Finder</h1> -->
-        <!-- </div> -->
-      <!-- </div> -->
-      <!-- <div class="col-xs-5 padding-none"> -->
-        <!-- <div class="banner-img-div center-block"> -->
-          <!-- <div class="card-container"> -->
-            <!-- <div class="card" id="f0"> -->
-              <!-- <div class="face front"></div> -->
-              <!-- <div class="face back"></div> -->
-            <!-- </div> -->
-          <!-- </div> -->
-
-          <!-- <div class="card-container"> -->
-            <!-- <div class="card" id="f1"> -->
-              <!-- <div class="face front"></div> -->
-              <!-- <div class="face back"></div> -->
-            <!-- </div> -->
-          <!-- </div> -->
-
-          <!-- <div class="card-container"> -->
-            <!-- <div class="card" id="f2"> -->
-              <!-- <div class="face front"></div> -->
-              <!-- <div class="face back"></div> -->
-            <!-- </div> -->
-          <!-- </div> -->
-
-          <!-- <div class="card-container"> -->
-            <!-- <div class="card" id="f3"> -->
-              <!-- <div class="face front"></div> -->
-              <!-- <div class="face back"></div> -->
-            <!-- </div> -->
-          <!-- </div> -->
-
-          <!-- <div class="card-container"> -->
-            <!-- <div class="card" id="f4"> -->
-              <!-- <div class="face front"></div> -->
-              <!-- <div class="face back"></div> -->
-            <!-- </div> -->
-          <!-- </div> -->
-
-          <!-- <div class="card-container"> -->
-            <!-- <div class="card" id="f5"> -->
-              <!-- <div class="face front"></div> -->
-              <!-- <div class="face back"></div> -->
-            <!-- </div> -->
-          <!-- </div> -->
-
-          <!-- <div class="card-container"> -->
-            <!-- <div class="card" id="f6"> -->
-              <!-- <div class="face front"></div> -->
-              <!-- <div class="face back"></div> -->
-            <!-- </div> -->
-          <!-- </div> -->
-
-          <!-- <div class="card-container"> -->
-            <!-- <div class="card" id="f7"> -->
-              <!-- <div class="face front"></div> -->
-              <!-- <div class="face back"></div> -->
-            <!-- </div> -->
-          <!-- </div> -->
-
-          <!-- <div class="card-container"> -->
-            <!-- <div class="card" id="f8"> -->
-              <!-- <div class="face front"></div> -->
-              <!-- <div class="face back"></div> -->
-            <!-- </div> -->
-          <!-- </div> -->
-        <!-- </div> -->
-      <!-- </div> -->
-      <!-- <div class="col-xs-1"></div> -->
-    <!-- </div> -->
-
-    <!-- <div class="container"> -->
-      <!-- <div class="main-panel"> -->
-        <!-- <div class="sub-panel"> -->
-
-          <!-- <div class="row padding-top padding-bottom main-panel"> -->
-            <!-- <div class="col-md-12"> -->
-              <!-- <p id="intro">Farm Finder is a place for food-growers to come together -->
-              <!-- to share their harvests, growing tips, and support. We have a loose -->
-              <!-- definition of farm - so whether yours is a kitchen planter, a -->
-              <!-- backyard garden, a community garden, or a full-blown operation -->
-              <!-- with tractors - you are welcome. You're also welcome if you -->
-              <!-- don't have a farm but are on the hunt for something home-grown. As we -->
-              <!-- like to say around here: <em class="blue">If you eat, you are in!</em> -->
-              <!-- </p> -->
-
-              <!-- <p id="intro"> -->
-              <!-- Browse the farms of community members in your area. When you're ready -->
-              <!-- to barter or buy something from a fellow farmer, simply sign in and -->
-              <!-- contact them. -->
-              <!-- </p> -->
-              <!-- <div id="center-btn-container"> -->
-                <!-- <a href="{{ url_for('farm.farmsShowAll') }}" id="solid-a-btn"> -->
-                  <!-- Find a Farm -->
-                <!-- </a> -->
-              <!-- </div> -->
-            <!-- </div> -->
-          <!-- </div> -->
-
-        <!-- </div> -->
-      <!-- </div> -->
-    <!-- </div> -->
 
     <script src="js/libs/jquery.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
     <script src="js/script.js"></script>
 	</body>
 </html>
