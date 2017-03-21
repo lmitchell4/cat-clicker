@@ -1,11 +1,12 @@
 $(function(){
 
-  // Hard-coding this for now:
+  // Hard-coding this for now.
   catNames = ["Chloe","Whiskers","Fred","Sprite","Jack and Jill"];
   catPics = ["cat-1-300.png","cat-2-300.png","cat-3-250.png",
              "cat-4-300.png","cat-5-300.png"];
 
-  function Cat(name, picture) {
+  function Cat(id, name, picture) {
+    this.id = id;
     this.name = name;
     this.picture = picture;
     this.counter = 0;
@@ -19,8 +20,9 @@ $(function(){
       // if (!localStorage.notes) {
         // localStorage.notes = JSON.stringify([]);
       // }
+      // Handling id locally since the cats are being stored in a database.
       for(i = 0; i < catNames.length; i++) {
-        this.cats[i] = new Cat(catNames[i], catPics[i]);
+        this.cats[i] = new Cat(id=i, name=catNames[i], picture=catPics[i]);
       }
     },
     add: function(obj) {
@@ -59,6 +61,16 @@ $(function(){
 
 
   var viewList = {
+    createListItem: function(id) {
+      // Generate an item for the list of cat names:
+      var htmlStr = "";
+      htmlStr += "<a id='cat-" + id + "' href='#' class='cat-name'>";
+      htmlStr += "<a href='#' class='cat-name'>";
+      htmlStr += cat.name;
+      htmlStr += "</a>";
+      htmlStr += "</li>";
+      return(htmlStr);
+    },    
     init: function() {
       // $("#cat").remove();
       // $("#cat-container").append(catElem);
@@ -75,7 +87,7 @@ $(function(){
       // });
       viewList.render();
     },
-    render: function() {     
+    render: function() {      
       var htmlStr = "";
       octopus.getCats().forEach(function(cat) {
         htmlStr += "<li>";
@@ -91,6 +103,11 @@ $(function(){
   
  
   var viewDisplay = {
+    // Function to generate the html text for creating a cat:
+    
+    // Function to add a listen to each cat name:
+
+    
     init: function() {
       // $("#cat-container").append(catElem);
       this.catDisplay = $("#cat-container");
