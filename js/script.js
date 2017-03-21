@@ -103,6 +103,7 @@ $(function(){
   
  
   var viewDisplay = {
+    currentCat: null,     
     // Function to generate the html text for creating a cat:
     createCat: function(cat) {
       var htmlStr = "<div id='cat'>";
