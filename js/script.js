@@ -121,7 +121,7 @@ $(function(){
     },
     
     // Function to add a listen to each cat name for keeping track of clicks:
-    catClickListener = function(cat) {
+    catClickListener: function(cat) {
       return function() {
         cat.counter++;
         $("#cat-counter-" + cat.id).text(cat.counter);
@@ -149,7 +149,7 @@ $(function(){
           // newNoteContent.val('');
           // e.preventDefault();
       // });
-      viewList.render();
+      viewDisplay.render();
     },
     render: function() {     
       $("#cat").remove();
