@@ -104,8 +104,36 @@ $(function(){
  
   var viewDisplay = {
     // Function to generate the html text for creating a cat:
+    createCat: function(cat) {
+      var htmlStr = "<div id='cat'>";
+      htmlStr += "<h2>" + cat.name + "</h2>";
+      htmlStr += "<a href='#'>";
+      htmlStr += "<img id='cat-img-" + cat.id + "' src='images/";
+      htmlStr += cat.picture + "'></a><div>";
+      htmlStr += "<h2 class='inline'></h2>";
+      htmlStr += "<h2 class='inline'>clicks:</h2>";
+      htmlStr += "<h2 id='cat-counter-" + num + "' class='inline'>";
+      htmlStr += cat.counter + "</h2>";
+      // htmlStr += "</div>";
+      // htmlStr += "</div>";
+      return htmlStr;
+    },
     
-    // Function to add a listen to each cat name:
+    // Function to add a listen to each cat name for keeping track of clicks:
+    catClickListener = function(cat) {
+      return function() {
+        cat.counter++;
+        $("#cat-counter-" + cat.id).text(cat.counter);
+      };
+    },
+    
+    // $("#cat-img-" + catNum).click(function(catNum) {
+      // return function() {
+        // counters[catNum]++;
+        // console.log("ok");
+        // $("#cat-counter-" + catNum).text(counters[catNum]);
+      // };
+    // }(catNum));
 
     
     init: function() {
@@ -126,14 +154,23 @@ $(function(){
       $("#cat").remove();
 
       var htmlStr = "";
-      octopus.getCats().forEach(function(cat) {
-        htmlStr += "<li>";
-        // htmlStr += "<a id='cat-name-" + i + "' href='#' class='cat-name'>";
-        htmlStr += "<a href='#' class='cat-name'>";
-        htmlStr += cat.name;
-        htmlStr += "</a>";
-        htmlStr += "</li>";
-      });
+      // octopus.getCats().forEach(function(cat) {
+        // htmlStr += "<li>";
+        // // htmlStr += "<a id='cat-name-" + i + "' href='#' class='cat-name'>";
+        // htmlStr += "<a href='#' class='cat-name'>";
+        // htmlStr += cat.name;
+        // htmlStr += "</a>";
+        // htmlStr += "</li>";
+      // });
+      
+    $("#cat-img-" + catNum).click(function(catNum) {
+      return function() {
+        counters[catNum]++;
+        console.log("ok");
+        $("#cat-counter-" + catNum).text(counters[catNum]);
+      };
+    }(catNum));
+    
       this.catList.append(htmlStr);
     }
   };
