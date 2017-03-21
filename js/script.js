@@ -21,7 +21,7 @@ $(function(){
         // localStorage.notes = JSON.stringify([]);
       // }
       // Handling id locally since the cats are being stored in a database.
-      for(i = 0; i < catNames.length; i++) {
+      for(var i = 0; i < catNames.length; i++) {
         this.cats[i] = new Cat(id=i, name=catNames[i], picture=catPics[i]);
       }
     },
@@ -61,16 +61,15 @@ $(function(){
 
 
   var viewList = {
-    createListItem: function(id) {
+    createListItem: function(cat) {
       // Generate an item for the list of cat names:
-      var htmlStr = "";
-      htmlStr += "<a id='cat-" + id + "' href='#' class='cat-name'>";
+      var htmlStr = "<li id='cat-" + cat.id + "' href='#'>";
       htmlStr += "<a href='#' class='cat-name'>";
       htmlStr += cat.name;
       htmlStr += "</a>";
       htmlStr += "</li>";
       return(htmlStr);
-    },    
+    },
     init: function() {
       // $("#cat").remove();
       // $("#cat-container").append(catElem);
@@ -89,54 +88,55 @@ $(function(){
     },
     render: function() {      
       var htmlStr = "";
-      octopus.getCats().forEach(function(cat) {
-        htmlStr += "<li>";
-        // htmlStr += "<a id='cat-name-" + i + "' href='#' class='cat-name'>";
-        htmlStr += "<a href='#' class='cat-name'>";
-        htmlStr += cat.name;
-        htmlStr += "</a>";
-        htmlStr += "</li>";
-      });
+      var cats = octopus.getCats();
+      for(var i = 0; i < catNames.length; i++) {
+        htmlStr += this.createListItem(cats[i]);
+      }
+      
+      // octopus.getCats().forEach(function(cat) {
+        // // var self = this;
+        // htmlStr += self.createListItem(cat);
+      // });
       this.catList.append(htmlStr);
     }
   };
   
  
-  var viewDisplay = {
-    // Function to generate the html text for creating a cat:
+  // var viewDisplay = {
+    // // Function to generate the html text for creating a cat:
     
-    // Function to add a listen to each cat name:
+    // // Function to add a listen to each cat name:
 
     
-    init: function() {
-      // $("#cat-container").append(catElem);
-      this.catDisplay = $("#cat-container");
+    // init: function() {
+      // // $("#cat-container").append(catElem);
+      // this.catDisplay = $("#cat-container");
       
-      // this.noteList = $('#notes');
-      // var newNoteForm = $('#new-note-form');
-      // var newNoteContent = $('#new-note-content');
-      // newNoteForm.submit(function(e){
-          // octopus.addNewNote(newNoteContent.val());
-          // newNoteContent.val('');
-          // e.preventDefault();
-      // });
-      viewList.render();
-    },
-    render: function() {     
-      $("#cat").remove();
+      // // this.noteList = $('#notes');
+      // // var newNoteForm = $('#new-note-form');
+      // // var newNoteContent = $('#new-note-content');
+      // // newNoteForm.submit(function(e){
+          // // octopus.addNewNote(newNoteContent.val());
+          // // newNoteContent.val('');
+          // // e.preventDefault();
+      // // });
+      // viewList.render();
+    // },
+    // render: function() {     
+      // $("#cat").remove();
 
-      var htmlStr = "";
-      octopus.getCats().forEach(function(cat) {
-        htmlStr += "<li>";
-        // htmlStr += "<a id='cat-name-" + i + "' href='#' class='cat-name'>";
-        htmlStr += "<a href='#' class='cat-name'>";
-        htmlStr += cat.name;
-        htmlStr += "</a>";
-        htmlStr += "</li>";
-      });
-      this.catList.append(htmlStr);
-    }
-  };
+      // var htmlStr = "";
+      // octopus.getCats().forEach(function(cat) {
+        // htmlStr += "<li>";
+        // // htmlStr += "<a id='cat-name-" + i + "' href='#' class='cat-name'>";
+        // htmlStr += "<a href='#' class='cat-name'>";
+        // htmlStr += cat.name;
+        // htmlStr += "</a>";
+        // htmlStr += "</li>";
+      // });
+      // this.catList.append(htmlStr);
+    // }
+  // };
 
   
   octopus.init();
