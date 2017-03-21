@@ -1,10 +1,9 @@
 $(function(){
-  
-  // Hard-coding this for now:
-  catNames: ["Chloe","Whiskers","Fred","Sprite","Jack and Jill"];
-  catPics: ["cat-1-300.png","cat-2-300.png","cat-3-250.png",
-            "cat-4-300.png","cat-5-300.png"];
 
+  // Hard-coding this for now:
+  catNames = ["Chloe","Whiskers","Fred","Sprite","Jack and Jill"];
+  catPics = ["cat-1-300.png","cat-2-300.png","cat-3-250.png",
+             "cat-4-300.png","cat-5-300.png"];
 
   function Cat(name, picture) {
     this.name = name;
@@ -30,7 +29,8 @@ $(function(){
       localStorage.notes = JSON.stringify(data);
     },
     getAllCats: function() {
-      return JSON.parse(localStorage.notes);
+      // return JSON.parse(localStorage.notes);
+      return this.cats;
     }
   };
 
@@ -38,14 +38,11 @@ $(function(){
   var octopus = {
     addNewNote: function(noteStr) {
       model.add({
-        
-
-        
         // cat name, clickCount, image url
         content: noteStr,
         dateSubmitted: Date.now()
       });
-      view.render();
+      viewList.render();
     },
 
     getCats: function() {
@@ -55,36 +52,43 @@ $(function(){
 
     init: function() {
       model.init();
-      view.init();
+      viewList.init();
     }
   };
 
 
-  var view = {
+  var viewList = {
     init: function() {
-      this.noteList = $('#notes');
-      var newNoteForm = $('#new-note-form');
-      var newNoteContent = $('#new-note-content');
-      newNoteForm.submit(function(e){
-          octopus.addNewNote(newNoteContent.val());
-          newNoteContent.val('');
-          e.preventDefault();
-      });
-      view.render();
+      // $("#cat").remove();
+      // $("#cat-container").append(catElem);
+      this.catList = $("#cat-list");
+      console.log(this.catList);
+      
+      // this.noteList = $('#notes');
+      // var newNoteForm = $('#new-note-form');
+      // var newNoteContent = $('#new-note-content');
+      // newNoteForm.submit(function(e){
+          // octopus.addNewNote(newNoteContent.val());
+          // newNoteContent.val('');
+          // e.preventDefault();
+      // });
+      viewList.render();
     },
-    render: function(){
-      var htmlStr = '';
-      octopus.getCats().forEach(function(cat){
-            htmlStr += '<li class="note">';
-            htmlStr += '<span class="note-date">';
-            htmlStr += new Date(cat.dateSubmitted).toString();
-            htmlStr += '</span>';
-            htmlStr += cat.content + '</li>';
+    render: function() {     
+      var htmlStr = "";
+      octopus.getCats().forEach(function(cat) {
+        htmlStr += "<li>";
+        // htmlStr += "<a id='cat-name-" + i + "' href='#' class='cat-name'>";
+        htmlStr += "<a href='#' class='cat-name'>";
+        htmlStr += cat.name;
+        htmlStr += "</a>";
+        htmlStr += "</li>";
       });
-      this.noteList.html( htmlStr );
+      this.catList.append(htmlStr);
     }
   };
-
+  
+  
   octopus.init();
   console.log(model.cats);
 });
@@ -93,64 +97,71 @@ $(function(){
 
 
 
-var numOfCats = 5;
-var catNames = ["Chloe","Whiskers","Fred","Sprite","Jack and Jill"];
-var catPics = ["cat-1-300.png","cat-2-300.png","cat-3-250.png",
-               "cat-4-300.png","cat-5-300.png"];
-var counters = [];
-var currentCat;
+// var numOfCats = 5;
+// var catNames = ["Chloe","Whiskers","Fred","Sprite","Jack and Jill"];
+// var catPics = ["cat-1-300.png","cat-2-300.png","cat-3-250.png",
+               // "cat-4-300.png","cat-5-300.png"];
+// var counters = [];
+// var currentCat;
 
 
-function createCat(num) {
-  var cat = "<div id='cat'>";
-  cat += "<h2>" + catNames[num] + "</h2>";
-  cat += "<a href='#'><img id='cat-img-" + num + "' src='images/" + catPics[num] + "'></a>";
-  cat += "<div>";
-  cat += "<h2 class='inline'></h2>";
-  cat += "<h2 class='inline'> clicks:</h2>";
-  cat += "<h2 id='cat-counter-" + num + "' class='inline'>" + counters[num] + "</h2>";
-  cat += "</div>";
-  cat += "</div>";
-  return cat;
-}
+// function createCat(num) {
+  // var cat = "<div id='cat'>";
+  // cat += "<h2>" + catNames[num] + "</h2>";
+  // cat += "<a href='#'><img id='cat-img-" + num + "' src='images/" + catPics[num] + "'></a>";
+  // cat += "<div>";
+  // cat += "<h2 class='inline'></h2>";
+  // cat += "<h2 class='inline'> clicks:</h2>";
+  // cat += "<h2 id='cat-counter-" + num + "' class='inline'>" + counters[num] + "</h2>";
+  // cat += "</div>";
+  // cat += "</div>";
+  // return cat;
+// }
 
-// var catList = [];
-var catList = $("#cat-list");
-for(var i = 0; i < numOfCats; i++) {
-  var item = "<li>";
-  item += "<a id='cat-name-" + i + "' href='#' class='cat-name'>";
-  item += catNames[i];
-  item += "</a>";
-  item += "</li>";
-  catList.append(item);
+// // var catList = [];
+// var catList = $("#cat-list");
+// for(var i = 0; i < numOfCats; i++) {
+  // var item = "<li>";
+  // item += "<a id='cat-name-" + i + "' href='#' class='cat-name'>";
+  // item += catNames[i];
+  // item += "</a>";
+  // item += "</li>";
+  // catList.append(item);
 
-  // Set up the counter for this cat:
-  counters[i] = 0;
+  // // Set up the counter for this cat:
+  // counters[i] = 0;
   
-  // Display the selected cat:
-  $("#cat-name-" + i).click(function(catNum) {
-    return function() {
-      // Create an element for this cat:
-      var catElem = createCat(catNum);
+  // // Display the selected cat:
+  // $("#cat-name-" + i).click(function(catNum) {
+    // return function() {
+      // // Create an element for this cat:
+      // var catElem = createCat(catNum);
 
-      if(catNum != currentCat) {
-        currentCat = catNum;
-        $("#cat").remove();
-        $("#cat-container").append(catElem);
-      }
+      // if(catNum != currentCat) {
+        // currentCat = catNum;
+        // $("#cat").remove();
+        // $("#cat-container").append(catElem);
+      // }
 
-      // Keep track of clicks:
-      $("#cat-img-" + catNum).click(function(catNum) {
-        return function() {
-          counters[catNum]++;
-          console.log("ok");
-          $("#cat-counter-" + catNum).text(counters[catNum]);
-        };
-      }(catNum));
+      // // Keep track of clicks:
+      // $("#cat-img-" + catNum).click(function(catNum) {
+        // return function() {
+          // counters[catNum]++;
+          // console.log("ok");
+          // $("#cat-counter-" + catNum).text(counters[catNum]);
+        // };
+      // }(catNum));
 
-    }
-  }(i));
-}
+    // }
+  // }(i));
+// }
+
+
+
+
+
+
+
 
 // var catOneName = "Chloe's";
 // $("#cat-1-name").text(catOneName);
