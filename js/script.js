@@ -53,6 +53,7 @@ $(function(){
     init: function() {
       model.init();
       viewList.init();
+      viewDisplay.init();
     }
   };
 
@@ -88,6 +89,38 @@ $(function(){
     }
   };
   
+ 
+  var viewDisplay = {
+    init: function() {
+      // $("#cat-container").append(catElem);
+      this.catDisplay = $("#cat-container");
+      
+      // this.noteList = $('#notes');
+      // var newNoteForm = $('#new-note-form');
+      // var newNoteContent = $('#new-note-content');
+      // newNoteForm.submit(function(e){
+          // octopus.addNewNote(newNoteContent.val());
+          // newNoteContent.val('');
+          // e.preventDefault();
+      // });
+      viewList.render();
+    },
+    render: function() {     
+      $("#cat").remove();
+
+      var htmlStr = "";
+      octopus.getCats().forEach(function(cat) {
+        htmlStr += "<li>";
+        // htmlStr += "<a id='cat-name-" + i + "' href='#' class='cat-name'>";
+        htmlStr += "<a href='#' class='cat-name'>";
+        htmlStr += cat.name;
+        htmlStr += "</a>";
+        htmlStr += "</li>";
+      });
+      this.catList.append(htmlStr);
+    }
+  };
+
   
   octopus.init();
   console.log(model.cats);
