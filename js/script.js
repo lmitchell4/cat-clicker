@@ -1,14 +1,27 @@
 $(function(){
+  
+  // Hard-coding this for now:
+  catNames: ["Chloe","Whiskers","Fred","Sprite","Jack and Jill"];
+  catPics: ["cat-1-300.png","cat-2-300.png","cat-3-250.png",
+            "cat-4-300.png","cat-5-300.png"];
+
+
+  function Cat(name, picture) {
+    this.name = name;
+    this.picture = picture;
+    this.counter = 0;
+  }
+  
+  
   var model = {
-    // Hard-coding the data:
-    catNames: ["Chloe","Whiskers","Fred","Sprite","Jack and Jill"],
-    catPics: ["cat-1-300.png","cat-2-300.png","cat-3-250.png",
-              "cat-4-300.png","cat-5-300.png"],
-    counters: [0,0,0,0,0],
+    cats: [],
 
     init: function() {
-      if (!localStorage.notes) {
-        localStorage.notes = JSON.stringify([]);
+      // if (!localStorage.notes) {
+        // localStorage.notes = JSON.stringify([]);
+      // }
+      for(i = 0; i < catNames.length; i++) {
+        this.cats[i] = new Cat(catNames[i], catPics[i]);
       }
     },
     add: function(obj) {
@@ -16,7 +29,7 @@ $(function(){
       data.push(obj);
       localStorage.notes = JSON.stringify(data);
     },
-    getAllNotes: function() {
+    getAllCats: function() {
       return JSON.parse(localStorage.notes);
     }
   };
@@ -35,8 +48,8 @@ $(function(){
       view.render();
     },
 
-    getNotes: function() {
-      return model.getAllNotes();
+    getCats: function() {
+      return model.getAllCats();
       // return model.getAllNotes().reverse();
     },
 
@@ -61,19 +74,19 @@ $(function(){
     },
     render: function(){
       var htmlStr = '';
-      octopus.getNotes().forEach(function(note){
+      octopus.getCats().forEach(function(cat){
             htmlStr += '<li class="note">';
             htmlStr += '<span class="note-date">';
-            htmlStr += new Date(note.dateSubmitted).toString();
+            htmlStr += new Date(cat.dateSubmitted).toString();
             htmlStr += '</span>';
-            htmlStr += note.content + '</li>';
+            htmlStr += cat.content + '</li>';
       });
       this.noteList.html( htmlStr );
     }
   };
 
   octopus.init();
-  console.log(model.catNames);
+  console.log(model.cats);
 });
 
 
