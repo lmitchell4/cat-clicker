@@ -1,16 +1,11 @@
 $(function(){
-  // Hard-coding the data:
-  catData = 
-  numOfCats = 5;
-  catNames = ["Chloe","Whiskers","Fred","Sprite","Jack and Jill"];
-  catPics = ["cat-1-300.png","cat-2-300.png","cat-3-250.png",
-                 "cat-4-300.png","cat-5-300.png"];
-  counters = [];
-  currentCat;
-
   var model = {
-    
-    
+    // Hard-coding the data:
+    catNames: ["Chloe","Whiskers","Fred","Sprite","Jack and Jill"],
+    catPics: ["cat-1-300.png","cat-2-300.png","cat-3-250.png",
+              "cat-4-300.png","cat-5-300.png"],
+    counters: [0,0,0,0,0],
+
     init: function() {
       if (!localStorage.notes) {
         localStorage.notes = JSON.stringify([]);
@@ -78,8 +73,8 @@ $(function(){
   };
 
   octopus.init();
+  console.log(model.catNames);
 });
-
 
 
 
