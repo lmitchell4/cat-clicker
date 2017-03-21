@@ -63,13 +63,13 @@ $(function(){
   var viewList = {
     createListItem: function(cat) {
       // Generate an item for the list of cat names:
-      var htmlStr = "<li id='cat-" + cat.id + "' href='#'>";
-      htmlStr += "<a href='#' class='cat-name'>";
+      var htmlStr = "<li>";
+      htmlStr += "<a id='cat-name-" + cat.id + "' href='#' class='cat-name'>";
       htmlStr += cat.name;
       htmlStr += "</a>";
       htmlStr += "</li>";
       return(htmlStr);
-    },
+    },  
     init: function() {
       // $("#cat").remove();
       // $("#cat-container").append(catElem);
@@ -102,41 +102,41 @@ $(function(){
   };
   
  
-  // var viewDisplay = {
-    // // Function to generate the html text for creating a cat:
+  var viewDisplay = {
+    // Function to generate the html text for creating a cat:
     
-    // // Function to add a listen to each cat name:
+    // Function to add a listen to each cat name:
 
     
-    // init: function() {
-      // // $("#cat-container").append(catElem);
-      // this.catDisplay = $("#cat-container");
+    init: function() {
+      // $("#cat-container").append(catElem);
+      this.catDisplay = $("#cat-container");
       
-      // // this.noteList = $('#notes');
-      // // var newNoteForm = $('#new-note-form');
-      // // var newNoteContent = $('#new-note-content');
-      // // newNoteForm.submit(function(e){
-          // // octopus.addNewNote(newNoteContent.val());
-          // // newNoteContent.val('');
-          // // e.preventDefault();
-      // // });
-      // viewList.render();
-    // },
-    // render: function() {     
-      // $("#cat").remove();
-
-      // var htmlStr = "";
-      // octopus.getCats().forEach(function(cat) {
-        // htmlStr += "<li>";
-        // // htmlStr += "<a id='cat-name-" + i + "' href='#' class='cat-name'>";
-        // htmlStr += "<a href='#' class='cat-name'>";
-        // htmlStr += cat.name;
-        // htmlStr += "</a>";
-        // htmlStr += "</li>";
+      // this.noteList = $('#notes');
+      // var newNoteForm = $('#new-note-form');
+      // var newNoteContent = $('#new-note-content');
+      // newNoteForm.submit(function(e){
+          // octopus.addNewNote(newNoteContent.val());
+          // newNoteContent.val('');
+          // e.preventDefault();
       // });
-      // this.catList.append(htmlStr);
-    // }
-  // };
+      viewList.render();
+    },
+    render: function() {     
+      $("#cat").remove();
+
+      var htmlStr = "";
+      octopus.getCats().forEach(function(cat) {
+        htmlStr += "<li>";
+        // htmlStr += "<a id='cat-name-" + i + "' href='#' class='cat-name'>";
+        htmlStr += "<a href='#' class='cat-name'>";
+        htmlStr += cat.name;
+        htmlStr += "</a>";
+        htmlStr += "</li>";
+      });
+      this.catList.append(htmlStr);
+    }
+  };
 
   
   octopus.init();
