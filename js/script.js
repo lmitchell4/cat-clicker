@@ -59,6 +59,10 @@ $(function(){
       return model.getCatByID(id);
     },
     
+    displayCat(cat) {
+      viewDisplay.render(cat);
+    },
+    
     init: function() {
       model.init();
       viewList.init();
@@ -76,7 +80,12 @@ $(function(){
       htmlStr += "</a>";
       htmlStr += "</li>";
       return(htmlStr);
-    },  
+    },
+    addSelectListener: function(cat) {
+      $("#cat-name-" + cat.id).click(function(innerCat) {
+        octopus.displayCat(innerCat);
+      }(cat));
+    },
     init: function() {
       // $("#cat").remove();
       // $("#cat-container").append(catElem);
