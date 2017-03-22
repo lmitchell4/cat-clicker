@@ -33,6 +33,9 @@ $(function(){
     getAllCats: function() {
       // return JSON.parse(localStorage.notes);
       return this.cats;
+    },
+    getCatByID: function(id) {
+      return this.cats[id];
     }
   };
 
@@ -52,6 +55,10 @@ $(function(){
       // return model.getAllNotes().reverse();
     },
 
+    getCat: function(id) {
+      return model.getCatByID(id);
+    },
+    
     init: function() {
       model.init();
       viewList.init();
