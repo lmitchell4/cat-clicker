@@ -106,6 +106,9 @@ $(function(){
       });
     },
     render: function(cat) {
+      if(this.catImg.attr("class") == "hidden") {
+        this.catImg.removeClass();
+      }
       var currentCat = octopus.getCurrentCat();
       this.catName.text(currentCat.name);
       this.catImg.attr("src", currentCat.picture);
