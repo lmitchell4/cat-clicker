@@ -110,11 +110,11 @@ $(function(){
     currentCat: null,     
     init: function() {
       this.catDisplay = $("#cat-display");
-      this.catElem = $("#cat");
     },
     render: function(cat) {
-      this.catElem.remove();
+      this.catDisplay.empty();
       
+      // var htmlStr = "<div id='cat'>";
       var htmlStr = "<h2>" + cat.name + "</h2>";
       htmlStr += "<a href='#'>";
       htmlStr += "<img id='cat-img-" + cat.id + "' src='images/";
@@ -125,6 +125,7 @@ $(function(){
       htmlStr += "<h2 id='cat-counter' class='inline'>";
       htmlStr += cat.counter + "</h2>";
       htmlStr += "</div>";
+      // htmlStr += "</div>";
       this.catDisplay.append(htmlStr);
 
       $("#cat-img-" + cat.id).click(function(innerCat) {
