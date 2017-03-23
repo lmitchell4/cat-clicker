@@ -2,8 +2,9 @@ $(function(){
 
   // Hard-coding this for now.
   catNames = ["Chloe","Whiskers","Fred","Sprite","Jack and Jill"];
-  catPics = ["cat-1-300.png","cat-2-300.png","cat-3-250.png",
-             "cat-4-300.png","cat-5-300.png"];
+  catPics = ["images/cat-1-300.png","images/cat-2-300.png",
+             "images/cat-3-250.png","images/cat-4-300.png",
+             "images/cat-5-300.png"];
 
   function Cat(id, name, picture) {
     this.id = id;
@@ -14,6 +15,7 @@ $(function(){
   
   
   var model = {
+    currentCat: null,
     cats: [],
     init: function() {
       // Handling id locally since the cats are being stored in a database.
@@ -27,30 +29,32 @@ $(function(){
     getCatByID: function(id) {
       return this.cats[id];
     },
-    addClick: function(id) {
-      var cat = this.getCatByID(id);
-      cat.counter++;
-      return cat.counter;
+    addClick: function() {
+      this.currentCat.counter++;
+      console.log(this.currentCat.counter);
     }
   };
 
 
   var octopus = {
+    getCurrentCat: function() {
+      return model.currentCat;
+    },
+    setCurrentCat: function(cat) {
+      model.currentCat = cat;
+    },
     getCats: function() {
       return model.getAllCats();
     },
     getCat: function(id) {
       return model.getCatByID(id);
     },
-    addClick(id) {
-      var counter = model.addClick(id);
-      return counter;
+    addClick: function() {
+      model.addClick();
+      viewDisplay.render();
     },
-    getCount(id) {
-      model.getCountById(id);
-    },
-    displayCat(cat) {
-      viewDisplay.render(cat);
+    displayCat: function() {
+      viewDisplay.render();
     },
     init: function() {
       model.init();
@@ -73,7 +77,8 @@ $(function(){
       // Add listener to display the selected cat:
       $("#cat-name-" + cat.id).click(function(innerCat) {
         return function() {
-          octopus.displayCat(innerCat);
+          octopus.setCurrentCat(innerCat);
+          octopus.displayCat();
         }
       }(cat));
     },
@@ -91,35 +96,22 @@ $(function(){
   
  
   var viewDisplay = {
-    currentCatID: null,     
     init: function() {
       this.catDisplay = $("#cat-display");
+      this.catName = $("#cat-name");
+      this.catImg = $("#cat-img");
+      this.catCounter = $("#cat-counter");
+      
+      this.catImg.click(function() {
+        console.log("ok");
+        octopus.addClick();
+      });
     },
     render: function(cat) {
-      if(this.currentCatID != cat.id) {
-        this.currentCatID = cat.id;
-        
-        this.catDisplay.empty();
-        
-        var htmlStr = "<h2>" + cat.name + "</h2>";
-        htmlStr += "<a href='#'>";
-        htmlStr += "<img id='cat-img-" + cat.id + "' src='images/";
-        htmlStr += cat.picture + "'></a>";
-        htmlStr += "<div>";
-        htmlStr += "<h2 class='inline'></h2>";
-        htmlStr += "<h2 class='inline'>clicks:</h2>";
-        htmlStr += "<h2 id='cat-counter' class='inline'>";
-        htmlStr += cat.counter + "</h2>";
-        htmlStr += "</div>";
-        this.catDisplay.append(htmlStr);
-
-        $("#cat-img-" + cat.id).click(function(innerCat) {
-          return function() {
-            var newClick = octopus.addClick(cat.id);
-            $("#cat-counter").text(newClick);
-          };
-        }(cat));
-      }
+      var currentCat = octopus.getCurrentCat();
+      this.catName.text(currentCat.name);
+      this.catImg.attr("src", currentCat.picture);
+      this.catCounter.text(currentCat.counter);
     }
   };
 
