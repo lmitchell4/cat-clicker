@@ -31,7 +31,6 @@ $(function(){
     },
     addClick: function() {
       this.currentCat.counter++;
-      console.log(this.currentCat.counter);
     }
   };
 
@@ -103,7 +102,6 @@ $(function(){
       this.catCounter = $("#cat-counter");
       
       this.catImg.click(function() {
-        console.log("ok");
         octopus.addClick();
       });
     },
