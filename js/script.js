@@ -28,7 +28,7 @@ $(function(){
       return this.cats[id];
     },
     addClick: function(id) {
-      var cat = this.getCatById(id);
+      var cat = this.getCatByID(id);
       cat.counter++;
       return cat.counter;
     }
