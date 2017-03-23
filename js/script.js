@@ -15,54 +15,49 @@ $(function(){
   
   var model = {
     cats: [],
-
     init: function() {
-      // if (!localStorage.notes) {
-        // localStorage.notes = JSON.stringify([]);
-      // }
       // Handling id locally since the cats are being stored in a database.
       for(var i = 0; i < catNames.length; i++) {
         this.cats[i] = new Cat(id=i, name=catNames[i], picture=catPics[i]);
       }
     },
-    add: function(obj) {
-      var data = JSON.parse(localStorage.notes);
-      data.push(obj);
-      localStorage.notes = JSON.stringify(data);
-    },
     getAllCats: function() {
-      // return JSON.parse(localStorage.notes);
       return this.cats;
     },
     getCatByID: function(id) {
       return this.cats[id];
+    },
+    addClick: function(id) {
+      var cat = this.getCatById(id);
+      cat.counter++;
+      return cat.counter;
     }
+    // ,
+    // getCountById: function(id) {
+      // var cat = this.getCatById;
+      // return cat.counter;
+    // }
   };
 
 
   var octopus = {
-    addNewNote: function(noteStr) {
-      model.add({
-        // cat name, clickCount, image url
-        content: noteStr,
-        dateSubmitted: Date.now()
-      });
-      viewList.render();
-    },
-
     getCats: function() {
       return model.getAllCats();
       // return model.getAllNotes().reverse();
     },
-
     getCat: function(id) {
       return model.getCatByID(id);
     },
-    
+    addClick(id) {
+      var counter = model.addClick(id);
+      return counter;
+    },
+    getCount(id) {
+      model.getCountById(id);
+    },
     displayCat(cat) {
       viewDisplay.render(cat);
     },
-    
     init: function() {
       model.init();
       viewList.init();
@@ -79,122 +74,71 @@ $(function(){
       htmlStr += cat.name;
       htmlStr += "</a>";
       htmlStr += "</li>";
-      return(htmlStr);
-    },
-    addSelectListener: function(cat) {
+      this.catList.append(htmlStr);
+
+      // Add listener to display the selected cat:
       $("#cat-name-" + cat.id).click(function(innerCat) {
-        octopus.displayCat(innerCat);
+        return function() {
+          octopus.displayCat(innerCat);
+        }
       }(cat));
     },
     init: function() {
-      // $("#cat").remove();
-      // $("#cat-container").append(catElem);
       this.catList = $("#cat-list");
-      console.log(this.catList);
-      
-      // this.noteList = $('#notes');
-      // var newNoteForm = $('#new-note-form');
-      // var newNoteContent = $('#new-note-content');
-      // newNoteForm.submit(function(e){
-          // octopus.addNewNote(newNoteContent.val());
-          // newNoteContent.val('');
-          // e.preventDefault();
-      // });
       viewList.render();
     },
-    render: function() {      
-      var htmlStr = "";
+    render: function() {
       var cats = octopus.getCats();
-      for(var i = 0; i < catNames.length; i++) {
-        htmlStr += this.createListItem(cats[i]);
+      for(var i = 0; i < cats.length; i++) {
+        this.createListItem(cats[i]);
       }
+
+      // for(var i = 0; i < catNames.length; i++) {
+        // htmlStr += this.createListItem(cats[i]);
+      // }
+      // this.catList.append(htmlStr);
       
       // octopus.getCats().forEach(function(cat) {
         // // var self = this;
         // htmlStr += self.createListItem(cat);
       // });
-      this.catList.append(htmlStr);
     }
   };
   
  
   var viewDisplay = {
     currentCat: null,     
-    // Function to generate the html text for creating a cat:
-    createCat: function(cat) {
-      var htmlStr = "<div id='cat'>";
-      htmlStr += "<h2>" + cat.name + "</h2>";
+    init: function() {
+      this.catDisplay = $("#cat-display");
+      this.catElem = $("#cat");
+    },
+    render: function(cat) {
+      this.catElem.remove();
+      
+      var htmlStr = "<h2>" + cat.name + "</h2>";
       htmlStr += "<a href='#'>";
       htmlStr += "<img id='cat-img-" + cat.id + "' src='images/";
-      htmlStr += cat.picture + "'></a><div>";
+      htmlStr += cat.picture + "'></a>";
+      htmlStr += "<div>";
       htmlStr += "<h2 class='inline'></h2>";
       htmlStr += "<h2 class='inline'>clicks:</h2>";
-      htmlStr += "<h2 id='cat-counter-" + num + "' class='inline'>";
+      htmlStr += "<h2 id='cat-counter' class='inline'>";
       htmlStr += cat.counter + "</h2>";
-      // htmlStr += "</div>";
-      // htmlStr += "</div>";
-      return htmlStr;
-    },
-    
-    // Function to add a listen to each cat name for keeping track of clicks:
-    catClickListener: function(cat) {
-      return function() {
-        cat.counter++;
-        $("#cat-counter-" + cat.id).text(cat.counter);
-      };
-    },
-    
-    // $("#cat-img-" + catNum).click(function(catNum) {
-      // return function() {
-        // counters[catNum]++;
-        // console.log("ok");
-        // $("#cat-counter-" + catNum).text(counters[catNum]);
-      // };
-    // }(catNum));
+      htmlStr += "</div>";
+      this.catDisplay.append(htmlStr);
 
-    
-    init: function() {
-      // $("#cat-container").append(catElem);
-      this.catDisplay = $("#cat-container");
-      
-      // this.noteList = $('#notes');
-      // var newNoteForm = $('#new-note-form');
-      // var newNoteContent = $('#new-note-content');
-      // newNoteForm.submit(function(e){
-          // octopus.addNewNote(newNoteContent.val());
-          // newNoteContent.val('');
-          // e.preventDefault();
-      // });
-      viewDisplay.render();
-    },
-    render: function() {     
-      $("#cat").remove();
-
-      var htmlStr = "";
-      // octopus.getCats().forEach(function(cat) {
-        // htmlStr += "<li>";
-        // // htmlStr += "<a id='cat-name-" + i + "' href='#' class='cat-name'>";
-        // htmlStr += "<a href='#' class='cat-name'>";
-        // htmlStr += cat.name;
-        // htmlStr += "</a>";
-        // htmlStr += "</li>";
-      // });
-      
-    $("#cat-img-" + catNum).click(function(catNum) {
-      return function() {
-        counters[catNum]++;
-        console.log("ok");
-        $("#cat-counter-" + catNum).text(counters[catNum]);
-      };
-    }(catNum));
-    
-      this.catList.append(htmlStr);
+      $("#cat-img-" + cat.id).click(function(innerCat) {
+        return function() {
+          var newClick = octopus.addClick(cat.id);
+          $("#cat-counter").text(newClick);
+        };
+      }(cat));
     }
   };
 
   
   octopus.init();
-  console.log(model.cats);
+  // console.log(model.cats);
 });
 
 
