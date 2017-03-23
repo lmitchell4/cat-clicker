@@ -107,33 +107,37 @@ $(function(){
   
  
   var viewDisplay = {
-    currentCat: null,     
+    currentCatID: null,     
     init: function() {
       this.catDisplay = $("#cat-display");
     },
     render: function(cat) {
-      this.catDisplay.empty();
-      
-      // var htmlStr = "<div id='cat'>";
-      var htmlStr = "<h2>" + cat.name + "</h2>";
-      htmlStr += "<a href='#'>";
-      htmlStr += "<img id='cat-img-" + cat.id + "' src='images/";
-      htmlStr += cat.picture + "'></a>";
-      htmlStr += "<div>";
-      htmlStr += "<h2 class='inline'></h2>";
-      htmlStr += "<h2 class='inline'>clicks:</h2>";
-      htmlStr += "<h2 id='cat-counter' class='inline'>";
-      htmlStr += cat.counter + "</h2>";
-      htmlStr += "</div>";
-      // htmlStr += "</div>";
-      this.catDisplay.append(htmlStr);
+      if(this.currentCatID != cat.id) {
+        this.currentCatID = cat.id;
+        
+        this.catDisplay.empty();
+        
+        // var htmlStr = "<div id='cat'>";
+        var htmlStr = "<h2>" + cat.name + "</h2>";
+        htmlStr += "<a href='#'>";
+        htmlStr += "<img id='cat-img-" + cat.id + "' src='images/";
+        htmlStr += cat.picture + "'></a>";
+        htmlStr += "<div>";
+        htmlStr += "<h2 class='inline'></h2>";
+        htmlStr += "<h2 class='inline'>clicks:</h2>";
+        htmlStr += "<h2 id='cat-counter' class='inline'>";
+        htmlStr += cat.counter + "</h2>";
+        htmlStr += "</div>";
+        // htmlStr += "</div>";
+        this.catDisplay.append(htmlStr);
 
-      $("#cat-img-" + cat.id).click(function(innerCat) {
-        return function() {
-          var newClick = octopus.addClick(cat.id);
-          $("#cat-counter").text(newClick);
-        };
-      }(cat));
+        $("#cat-img-" + cat.id).click(function(innerCat) {
+          return function() {
+            var newClick = octopus.addClick(cat.id);
+            $("#cat-counter").text(newClick);
+          };
+        }(cat));
+      }
     }
   };
 
