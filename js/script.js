@@ -79,7 +79,7 @@ $(function(){
     },
     init: function() {
       this.catList = $("#cat-list");
-      viewList.render();
+      this.render();
     },
     render: function() {
       var cats = octopus.getCats();
