@@ -64,16 +64,6 @@ $(function(){
       this.adminMode = newMode;
       viewAdmin.render();
     },
-    // setAdminMode: function(newMode) {
-      // console.log(this.adminMode);
-      // console.log(newMode);
-      // if(newMode == null) {
-        // this.adminMode = !this.adminMode;
-      // } else {
-        // this.adminMode = newMode;
-      // }
-      // viewAdmin.render();
-    // },
     getAdminMode: function() {
       return this.adminMode;
     },
@@ -151,7 +141,6 @@ $(function(){
       
       var adminBtn = $("#admin-btn");
       var cancelBtn = $("#cnl-btn");
-      // var saveBtn = $("#save-btn");
       
       adminBtn.click(function() {
         octopus.setAdminMode(!octopus.getAdminMode());
