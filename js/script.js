@@ -18,7 +18,6 @@ $(function(){
     currentCat: null,
     cats: [],
     init: function() {
-      // Handling id locally since the cats are being stored in a database.
       for(var i = 0; i < catNames.length; i++) {
         this.cats[i] = new Cat(id=i, name=catNames[i], picture=catPics[i]);
       }
