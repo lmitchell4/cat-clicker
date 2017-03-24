@@ -36,6 +36,7 @@ $(function(){
 
 
   var octopus = {
+    adminMode: false,
     getCurrentCat: function() {
       return model.currentCat;
     },
@@ -55,10 +56,28 @@ $(function(){
     displayCat: function() {
       viewDisplay.render();
     },
+    setAdminMode: function(newMode) {
+      this.adminMode = newMode;
+      viewAdmin.render();
+    },
+    // setAdminMode: function(newMode) {
+      // console.log(this.adminMode);
+      // console.log(newMode);
+      // if(newMode == null) {
+        // this.adminMode = !this.adminMode;
+      // } else {
+        // this.adminMode = newMode;
+      // }
+      // viewAdmin.render();
+    // },
+    getAdminMode: function() {
+      return this.adminMode;
+    },
     init: function() {
       model.init();
       viewList.init();
       viewDisplay.init();
+      viewAdmin.init();
     }
   };
 
@@ -115,6 +134,59 @@ $(function(){
       this.catCounter.text(currentCat.counter);
     }
   };
+
+
+  var viewAdmin = {
+    init: function() {
+      // this.adminDisplay = $("#admin-display");
+      
+      this.adminForm = $("#admin-form");
+      this.nameInput = $("#name");
+      this.imageInput = $("#image");
+      this.counterInput = $("#counter");
+      
+      var adminBtn = $("#admin-btn");
+      var cancelBtn = $("#cnl-btn");
+      var saveBtn = $("#save-btn");
+      
+      adminBtn.click(function() {
+        octopus.setAdminMode(!octopus.getAdminMode());
+      });
+      cancelBtn.click(function() {
+        octopus.setAdminMode(false);
+      });
+        
+      this.adminForm.submit(function(e){
+        var currentCat = octopus.getCurrentCat();
+        
+        if(currentCat) {
+          console.log(this.nameInput);
+          var newName = this.nameInput.val();
+          var newImage = this.imageInput.val();
+          var newCounter = this.counterInput.val();
+          
+          octopus.updateCurrentCat(newName, newImage, newCounter);
+          e.preventDefault();
+          
+          octopus.setAdminMode(false);
+        }
+      });
+    },
+    render: function() {
+      if(octopus.getAdminMode()) {
+        this.adminForm.removeClass();
+        
+        var currentCat = octopus.getCurrentCat();
+        this.nameInput.val(currentCat.name);
+        this.imageInput.val(currentCat.picture);
+        this.counterInput.val(currentCat.counter);
+      } else {
+        this.adminForm.attr("class","hidden");
+      }
+    }
+  };
+// adminView
+// -init call once, add event listeners for the buttons
 
   
   octopus.init();
