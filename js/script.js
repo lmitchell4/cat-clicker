@@ -43,6 +43,11 @@ $(function(){
     setCurrentCat: function(cat) {
       model.currentCat = cat;
     },
+    updateCurrentCat: function(name, picture, counter) {
+      model.currentCat.name = name;
+      model.currentCat.picture = picture;
+      model.currentCat.counter = counter;
+    },
     getCats: function() {
       return model.getAllCats();
     },
@@ -138,7 +143,7 @@ $(function(){
 
   var viewAdmin = {
     init: function() {
-      // this.adminDisplay = $("#admin-display");
+      var instance = this;
       
       this.adminForm = $("#admin-form");
       this.nameInput = $("#name");
@@ -147,7 +152,7 @@ $(function(){
       
       var adminBtn = $("#admin-btn");
       var cancelBtn = $("#cnl-btn");
-      var saveBtn = $("#save-btn");
+      // var saveBtn = $("#save-btn");
       
       adminBtn.click(function() {
         octopus.setAdminMode(!octopus.getAdminMode());
@@ -160,15 +165,14 @@ $(function(){
         var currentCat = octopus.getCurrentCat();
         
         if(currentCat) {
-          console.log(this.nameInput);
-          var newName = this.nameInput.val();
-          var newImage = this.imageInput.val();
-          var newCounter = this.counterInput.val();
+          var newName = instance.nameInput.val();
+          var newImage = instance.imageInput.val();
+          var newCounter = instance.counterInput.val();
           
           octopus.updateCurrentCat(newName, newImage, newCounter);
-          e.preventDefault();
-          
           octopus.setAdminMode(false);
+          octopus.displayCat();
+          e.preventDefault();
         }
       });
     },
@@ -185,8 +189,6 @@ $(function(){
       }
     }
   };
-// adminView
-// -init call once, add event listeners for the buttons
 
   
   octopus.init();
